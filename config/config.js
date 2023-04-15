@@ -11,7 +11,7 @@ const sequelize = process.env.JAWSDB_URL
   : new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
       host: 'localhost',
       dialect: 'mysql',
-      port: 3306
+      port: 3001
     });
 
     const db = {};
@@ -52,10 +52,19 @@ db.Comment.belongsTo(db.User, {
 
 // Create a new SequelizeStore and add it to the sess object
 const sess = {
+  secret: process.env.SESSION_SECRET,
   store: new SequelizeStore({
     db: sequelize,
+    table: 'Session'
   }),
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 2, // expires in 2 hours
+    httpOnly: true
+  }
 };
+
 
 // Add SESSION_SECRET to the sess object
 sess.secret = process.env.SESSION_SECRET;

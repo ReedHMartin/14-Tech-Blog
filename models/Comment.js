@@ -1,6 +1,10 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/config');
 
+// Import the Post and User models
+const Post = require('./Post');
+const User = require('./User');
+
 class Comment extends Model {}
 
 Comment.init(

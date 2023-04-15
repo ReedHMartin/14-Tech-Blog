@@ -4,8 +4,4 @@ const Comment = require('./Comment');
 
 // SET UP RELATIONSHIPS
 
-module.exports = {
-  User,
-  Comment,
-  Post
-};
+module.exports = { User, Post, Comment };
