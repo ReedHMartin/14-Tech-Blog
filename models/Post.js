@@ -13,7 +13,14 @@ Post.init(
   }
 );
 
-// TODO: Define associations for Post model
-// TODO: Add any necessary class or instance methods
+// Define associations for Post model
+Post.belongsTo(User, {
+  foreignKey: 'user_id'
+});
+
+Post.hasMany(Comment, {
+  foreignKey: 'post_id',
+  onDelete: 'CASCADE',
+});
 
 module.exports = Post;
