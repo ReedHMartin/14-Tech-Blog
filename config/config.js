@@ -14,7 +14,7 @@ const sequelize = process.env.JAWSDB_URL
       port: 3001
     });
 
-    const db = {};
+const db = {};
 
 // Define Sequelize instance and add it to the db object
 db.Sequelize = Sequelize;
