@@ -15,4 +15,7 @@ Comment.init(
   }
 );
 
+// TODO: Define associations for Comment model
+// TODO: Add any necessary class or instance methods
+
 module.exports = Comment;
