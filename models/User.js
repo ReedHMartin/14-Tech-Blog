@@ -50,4 +50,7 @@ User.init(
   }
 );
 
+// TODO: Define associations for User model
+// TODO: Add any necessary class or instance methods
+
 module.exports = User;
