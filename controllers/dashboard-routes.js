@@ -22,14 +22,28 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
-// TODO: Add route for creating a new post
+// Add route for creating a new post
 router.get('/new', withAuth, (req, res) => {
   res.render('new-post', {
     layout: 'dashboard',
   });
 });
 
-// TODO: Add route for handling new post form submission
+
+// Add route for handling new post form submission
+router.post('/new', withAuth, async (req, res) => {
+  try {
+    const newPostData = await Post.create({
+      ...req.body,
+      userId: req.session.userId,
+    });
+
+    res.status(200).json(newPostData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 
 // Get a specific post for the logged-in user
 router.get('/edit/:id', withAuth, async (req, res) => {
