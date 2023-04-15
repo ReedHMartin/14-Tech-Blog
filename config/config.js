@@ -1,4 +1,7 @@
 const Sequelize = require('sequelize');
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
 
 require('dotenv').config();
 
@@ -46,5 +49,13 @@ db.User.hasMany(db.Comment, {
 db.Comment.belongsTo(db.User, {
   foreignKey: 'user_id'
 });
+
+// TODO: Create a new SequelizeStore and add it to the sess object
+const sess = {
+  
+};
+
+// TODO: Add SESSION_SECRET to the sess object
+// sess.secret = process.env.SESSION_SECRET;
 
 module.exports = sequelize;
