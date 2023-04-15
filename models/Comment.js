@@ -1,31 +1,46 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/config');
 
-// Import the Post and User models
-const Post = require('./Post');
-const User = require('./User');
+// // Import the Post and User models
+// const Post = require('./Post');
+// const User = require('./User');
 
 class Comment extends Model {}
 
 Comment.init(
   {
-    body: {
+    id: {
+      type:DataTypes.INTEGER,
+      primaryKey:true,
+      allowNull: false,
+      autoIncrement: true,
+    },
+    description: {
       type: DataTypes.STRING,
-      allowNull: false
-    }
-  },
+      allowNull: false,
+    },
+    post_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "post",
+        key: "id",
+      },
+    },
+    createdAt: {
+      type: DataTypes. DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+  },  
+},
+
   {
-    sequelize
+    sequelize,
+    freezeTableName: true,
+    underscored: true,
+    modelName: "comment",
   }
 );
 
-// Define associations for Comment model
-Comment.belongsTo(User, {
-  foreignKey: 'user_id'
-})
 
-Comment.belongsTo(Post, {
-  foreignKey: 'post_id'
-});
 
 module.exports = Comment;

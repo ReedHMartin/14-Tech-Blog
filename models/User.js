@@ -54,16 +54,6 @@ User.init(
   }
 );
 
-// Define associations for User model
-User.hasMany(Post, {
-  foreignKey: 'user_id',
-});
-
-User.hasMany(Comment, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE',
-});
-
 // Add instance method to get the user's posts
 User.prototype.getPosts = async function() {
   const posts = await Post.findAll({ where: { user_id: this.id } });

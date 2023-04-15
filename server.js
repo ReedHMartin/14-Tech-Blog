@@ -7,7 +7,7 @@ const helpers = require('./utils/helpers');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const sequelize = require('./config/config');
+const sequelize = require('./config/config.js');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // Configure express-session
@@ -35,7 +35,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Add routes for API and HTML
 app.use(require('./controllers/'));
 
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}!`);
-  sequelize.sync({ force: false });
+sequelize.authenticate().then(() => {
+  console.log('Connection has been established successfully.');
+  return sequelize.sync({ force: false });
+}).then(() => {
+  app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}!`);
+  });
+}).catch(error => {
+  console.error('Unable to connect to the database:', error);
 });
