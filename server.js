@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3001;
 const sequelize = require('./config/config');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-// configure express-session
+// TODO: Configure express-session
 const sess = {
   
 };
@@ -26,6 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Add routes for API and HTML
 app.use(require('./controllers/'));
 
 app.listen(PORT, () => {
