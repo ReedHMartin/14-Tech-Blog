@@ -65,7 +65,26 @@ router.get('/edit/:id', withAuth, async (req, res) => {
   }
 });
 
-// TODO: Add route for handling post update form submission
+// Add route for handling post update form submission
+router.put('/edit/:id', withAuth, async (req, res) => {
+  try {
+    const [numRowsAffected, updatedPostData] = await Post.update(req.body, {
+      where: {
+        id: req.params.id,
+        userId: req.session.userId,
+      },
+      returning: true,
+    });
+
+    if (numRowsAffected === 0) {
+      res.status(404).end();
+    } else {
+      res.status(200).json(updatedPostData[0]);
+    }
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
 // TODO: Add route for handling post deletion
 
