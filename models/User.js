@@ -60,6 +60,16 @@ User.hasMany(Comment, {
   onDelete: 'CASCADE',
 });
 
-// TODO: Add any necessary class or instance methods
+// Add instance method to get the user's posts
+User.prototype.getPosts = async function() {
+  const posts = await Post.findAll({ where: { user_id: this.id } });
+  return posts;
+}
+
+// Add instance method to get the user's comments
+User.prototype.getComments = async function() {
+  const comments = await Comment.findAll({ where: { user_id: this.id } });
+  return comments;
+}
 
 module.exports = User;
