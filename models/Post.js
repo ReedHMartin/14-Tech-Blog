@@ -13,4 +13,7 @@ Post.init(
   }
 );
 
+// TODO: Define associations for Post model
+// TODO: Add any necessary class or instance methods
+
 module.exports = Post;
