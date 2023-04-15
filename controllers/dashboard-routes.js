@@ -86,6 +86,24 @@ router.put('/edit/:id', withAuth, async (req, res) => {
   }
 });
 
-// TODO: Add route for handling post deletion
+// Add route for handling post deletion
+router.delete('/edit/:id', withAuth, async (req, res) => {
+  try {
+    const numRowsAffected = await Post.destroy({
+      where: {
+        id: req.params.id,
+        userId: req.session.userId,
+      },
+    });
+
+    if (numRowsAffected === 0) {
+      res.status(404).end();
+    } else {
+      res.status(200).end();
+    }
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
 module.exports = router;
