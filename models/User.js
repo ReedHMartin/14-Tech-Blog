@@ -50,7 +50,16 @@ User.init(
   }
 );
 
-// TODO: Define associations for User model
+// Define associations for User model
+User.hasMany(Post, {
+  foreignKey: 'user_id',
+});
+
+User.hasMany(Comment, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE',
+});
+
 // TODO: Add any necessary class or instance methods
 
 module.exports = User;
