@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Post } = require('../models/');
 const withAuth = require('../utils/auth');
 
+// Get all posts for the logged-in user
 router.get('/', withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -21,12 +22,16 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
+// TODO: Add route for creating a new post
 router.get('/new', withAuth, (req, res) => {
   res.render('new-post', {
     layout: 'dashboard',
   });
 });
 
+// TODO: Add route for handling new post form submission
+
+// Get a specific post for the logged-in user
 router.get('/edit/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id);
@@ -45,5 +50,9 @@ router.get('/edit/:id', withAuth, async (req, res) => {
     res.redirect('login');
   }
 });
+
+// TODO: Add route for handling post update form submission
+
+// TODO: Add route for handling post deletion
 
 module.exports = router;
