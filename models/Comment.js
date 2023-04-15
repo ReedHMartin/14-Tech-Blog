@@ -15,7 +15,13 @@ Comment.init(
   }
 );
 
-// TODO: Define associations for Comment model
-// TODO: Add any necessary class or instance methods
+// Define associations for Comment model
+Comment.belongsTo(User, {
+  foreignKey: 'user_id'
+});
+
+Comment.belongsTo(Post, {
+  foreignKey: 'post_id'
+});
 
 module.exports = Comment;
