@@ -50,12 +50,14 @@ db.Comment.belongsTo(db.User, {
   foreignKey: 'user_id'
 });
 
-// TODO: Create a new SequelizeStore and add it to the sess object
+// Create a new SequelizeStore and add it to the sess object
 const sess = {
-  
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
 };
 
-// TODO: Add SESSION_SECRET to the sess object
-// sess.secret = process.env.SESSION_SECRET;
+// Add SESSION_SECRET to the sess object
+sess.secret = process.env.SESSION_SECRET;
 
 module.exports = sequelize;
